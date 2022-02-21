@@ -6,15 +6,7 @@ module.exports = {
 	mode: "development",
 	devtool: "inline-source-map", // omit in production
 	entry: {
-		index: {
-			import: "./src/index.js",
-			dependOn: "shared",
-		},
-		another: {
-			import: "./src/another-module.js",
-			dependOn: "shared",
-		},
-		shared: "lodash",
+		index: "./src/index.js",
 	},
 	devServer: {
 		static: "./dist",
@@ -37,10 +29,5 @@ module.exports = {
 		filename: "[name].bundle.js",
 		path: path.resolve(__dirname, "dist"),
 		clean: true,
-	},
-	optimization: {
-		splitChunks: {
-			chunks: "all",
-		},
 	},
 };
