@@ -3,7 +3,7 @@ const HTMLWebpackPlugin = require("html-webpack-plugin");
 const webpack = require("webpack");
 
 module.exports = {
-    mode="development",
+    mode: "development",
 	devtool: "inline-source-map", // omit in production
 	entry: {
 		app: "./src/index.js",
