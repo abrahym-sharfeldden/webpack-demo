@@ -1,8 +1,9 @@
 const path = require("path");
 const HTMLWebpackPlugin = require("html-webpack-plugin");
-const webpack = require("webpack");
+const ShowAssetsTablePlugin = require("webpack-show-assets-table");
 
 module.exports = {
+	performance: { hints: false },
 	mode: "development",
 	devtool: "inline-source-map", // omit in production
 	entry: {
@@ -22,12 +23,26 @@ module.exports = {
 	},
 	plugins: [
 		new HTMLWebpackPlugin({
-			title: "Development",
+			title: "Caching",
 		}),
+		new ShowAssetsTablePlugin(),
 	],
 	output: {
-		filename: "[name].bundle.js",
+		filename: "[name].[contenthash].js",
 		path: path.resolve(__dirname, "dist"),
 		clean: true,
+	},
+	optimization: {
+		moduleIds: "deterministic",
+		runtimeChunk: "single",
+		splitChunks: {
+			cacheGroups: {
+				vendor: {
+					test: /[\\/]nodemodules[\\/]/,
+					name: "vendors",
+					chunks: "all",
+				},
+			},
+		},
 	},
 };
